@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kings Research Mailer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="main-container">
+        <div class="brand-panel">
+            <div class="brand-content">
+                <div class="logo">KR</div>
+                <h1>Kings Research</h1>
+                <p>Advanced Email Distribution Platform</p>
+            </div>
+        </div>
+        <div class="content-panel">
+            <div id="form-view">
+                <h2>Create a New Campaign</h2>
+                <form id="email-form">
+                    <div class="form-group">
+                        <label for="subject">Email Subject</label>
+                        <input type="text" id="subject" name="subject" placeholder="e.g., A special offer for {name}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="body">Email Body</label>
+                        <textarea id="body" name="body" rows="8" placeholder="Hello {name},&#10;&#10;This is a <b>special announcement</b>..." required></textarea>
+                        <small>Use {name} for personalization. Use &lt;b&gt;...&lt;/b&gt; tags to make text bold.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="recipients_file">Recipients File (CSV)</label>
+                        <input type="file" id="recipients_file" name="recipients_file" accept=".csv" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="senders_file">Senders File (CSV)</label>
+                        <input type="file" id="senders_file" name="senders_file" accept=".csv" required>
+                        <small>Must contain 'email' and 'app_password' columns.</small>
+                    </div>
+                    <button type="submit" id="submit-btn">Start Sending</button>
+                </form>
+            </div>
+
+            <div id="progress-view" class="hidden">
+                <h2>Campaign in Progress...</h2>
+                <div class="progress-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Progress</span>
+                        <span class="stat-value" id="progress-percent">0%</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Sent Successfully</span>
+                        <span class="stat-value" id="success-counter">0</span>
+                    </div>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" id="progress-bar"></div>
+                </div>
+                <div class="status-log">
+                    <p>Status: <span id="status-message">Initializing...</span></p>
+                </div>
+            </div>
+
+            <div id="complete-view" class="hidden">
+                <h2>Campaign Complete!</h2>
+                <p>Your email campaign has finished sending.</p>
+                <a href="#" id="download-link" class="button">Download Report</a>
+                <button id="reset-btn" class="button-secondary">Start New Campaign</button>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,159 @@
+2025-09-18 00:34:55,135 - INFO - Found 5 recipients in ./EmailTest.csv
+2025-09-18 00:34:55,135 - INFO - Loaded 1 sender accounts.
+2025-09-18 00:34:55,158 - INFO - (1/5) Preparing email for samhim1008@gmail.com using himanshusingh60120@gmail.com [ID: 839fb803-38de-4eaf-83a8-396ae4406d70]
+2025-09-18 00:34:58,747 - INFO - --> Email sent successfully to samhim1008@gmail.com
+2025-09-18 00:34:58,985 - INFO - Waiting for 63 seconds...
+2025-09-18 00:36:01,987 - INFO - (2/5) Preparing email for samruddhijadhav1095@gmail.com using himanshusingh60120@gmail.com [ID: 15eb912b-3e46-400f-a309-1ca693b7577e]
+2025-09-18 00:36:05,539 - INFO - --> Email sent successfully to samruddhijadhav1095@gmail.com
+2025-09-18 00:36:05,791 - INFO - Waiting for 67 seconds...
+2025-09-18 00:37:12,794 - INFO - (3/5) Preparing email for sampics710@gmail.com using himanshusingh60120@gmail.com [ID: 9e517975-2e20-4756-8078-a0ee03249885]
+2025-09-18 00:37:17,072 - INFO - --> Email sent successfully to sampics710@gmail.com
+2025-09-18 00:37:17,320 - INFO - Waiting for 79 seconds...
+2025-09-18 00:38:36,319 - INFO - (4/5) Preparing email for samruddhij710@gmail.com using himanshusingh60120@gmail.com [ID: 991bc766-a5fa-454c-8165-fe2a4b365721]
+2025-09-18 00:38:40,034 - INFO - --> Email sent successfully to samruddhij710@gmail.com
+2025-09-18 00:38:40,291 - INFO - Waiting for 64 seconds...
+2025-09-18 00:39:44,294 - INFO - (5/5) Preparing email for sansan4727@gmail.com using himanshusingh60120@gmail.com [ID: 5f7402dc-712e-4aa6-ad6f-5041ba3f9baf]
+2025-09-18 00:39:48,326 - INFO - --> Email sent successfully to sansan4727@gmail.com
+2025-09-18 00:39:48,574 - INFO - Sending report successfully saved to ./sending_report.csv
+2025-09-18 00:42:55,379 - INFO - Found 5 recipients in ./EmailTest.csv
+2025-09-18 00:42:55,380 - INFO - Loaded 1 sender accounts.
+2025-09-18 00:42:55,396 - INFO - (1/5) Preparing email for samhim1008@gmail.com using himanshusingh60120@gmail.com [ID: 5d784c67-0451-491e-a365-dc62ee2c4746]
+2025-09-18 00:42:59,566 - INFO - --> Email sent successfully to samhim1008@gmail.com
+2025-09-18 00:42:59,847 - INFO - Waiting for 2 seconds...
+2025-09-18 00:43:01,848 - INFO - (2/5) Preparing email for samruddhijadhav1095@gmail.com using himanshusingh60120@gmail.com [ID: ba705368-97e5-40f2-9323-9f2435073030]
+2025-09-18 00:43:06,073 - INFO - --> Email sent successfully to samruddhijadhav1095@gmail.com
+2025-09-18 00:43:06,392 - INFO - Waiting for 4 seconds...
+2025-09-18 00:43:10,395 - INFO - (3/5) Preparing email for sampics710@gmail.com using himanshusingh60120@gmail.com [ID: f4ae343a-8330-4f86-b5c7-0d951e217521]
+2025-09-18 00:43:14,287 - INFO - --> Email sent successfully to sampics710@gmail.com
+2025-09-18 00:43:14,594 - INFO - Waiting for 1 seconds...
+2025-09-18 00:43:15,595 - INFO - (4/5) Preparing email for samruddhij710@gmail.com using himanshusingh60120@gmail.com [ID: 40322b5d-4ace-4565-8c4c-87cb922d87d2]
+2025-09-18 00:43:19,818 - INFO - --> Email sent successfully to samruddhij710@gmail.com
+2025-09-18 00:43:20,075 - INFO - Waiting for 2 seconds...
+2025-09-18 00:43:22,080 - INFO - (5/5) Preparing email for sansan4727@gmail.com using himanshusingh60120@gmail.com [ID: cc99daec-17cb-4373-9b3f-0a663d214ada]
+2025-09-18 00:43:26,057 - INFO - --> Email sent successfully to sansan4727@gmail.com
+2025-09-18 00:43:26,360 - INFO - Sending report successfully saved to ./sending_report.csv
+2025-09-18 00:55:30,154 - INFO - Found 5 recipients in ./EmailTest.csv
+2025-09-18 00:55:30,154 - INFO - Loaded 1 sender accounts.
+2025-09-18 00:55:30,169 - INFO - (1/5) Preparing email for samhim1008@gmail.com using himanshusingh60120@gmail.com [ID: 1e935104-5b91-48ac-b375-93aa21929382]
+2025-09-18 00:55:33,967 - INFO - --> Email sent successfully to samhim1008@gmail.com
+2025-09-18 00:55:34,203 - INFO - Waiting for 1 seconds...
+2025-09-18 00:55:35,204 - INFO - (2/5) Preparing email for samruddhijadhav1095@gmail.com using himanshusingh60120@gmail.com [ID: 4556713d-3179-44ca-9c68-a1499bd4bedf]
+2025-09-18 00:55:38,967 - INFO - --> Email sent successfully to samruddhijadhav1095@gmail.com
+2025-09-18 00:55:39,240 - INFO - Waiting for 1 seconds...
+2025-09-18 00:55:40,241 - INFO - (3/5) Preparing email for sampics710@gmail.com using himanshusingh60120@gmail.com [ID: 2e6b9b72-32b2-429b-97d2-0d16a59affa7]
+2025-09-18 00:55:43,853 - INFO - --> Email sent successfully to sampics710@gmail.com
+2025-09-18 00:55:44,119 - INFO - Waiting for 2 seconds...
+2025-09-18 00:55:46,123 - INFO - (4/5) Preparing email for samruddhij710@gmail.com using himanshusingh60120@gmail.com [ID: 45b7e33f-bee2-47c2-99ee-62a825fa4c3e]
+2025-09-18 00:55:50,243 - INFO - --> Email sent successfully to samruddhij710@gmail.com
+2025-09-18 00:55:50,498 - INFO - Waiting for 1 seconds...
+2025-09-18 00:55:51,504 - INFO - (5/5) Preparing email for sansan4727@gmail.com using himanshusingh60120@gmail.com [ID: ad77d417-8aae-45c3-9512-dfa481fcead5]
+2025-09-18 00:55:55,168 - INFO - --> Email sent successfully to sansan4727@gmail.com
+2025-09-18 00:55:55,420 - INFO - Sending report successfully saved to ./sending_report.csv
+2025-09-18 00:59:04,944 - INFO - Found 6 recipients in ./EmailTest.csv
+2025-09-18 00:59:04,944 - INFO - Loaded 1 sender accounts.
+2025-09-18 00:59:04,961 - INFO - (1/6) Preparing email for samhim1008@gmail.com using himanshusingh60120@gmail.com [ID: abe59294-897a-4380-bc08-eb9ab60b4402]
+2025-09-18 00:59:09,167 - INFO - --> Email sent successfully to samhim1008@gmail.com
+2025-09-18 00:59:09,425 - INFO - Waiting for 1 seconds...
+2025-09-18 00:59:10,428 - INFO - (2/6) Preparing email for samruddhijadhav1095@gmail.com using himanshusingh60120@gmail.com [ID: 07b0f8e0-e476-4c0c-b570-42c535dec29f]
+2025-09-18 00:59:13,996 - INFO - --> Email sent successfully to samruddhijadhav1095@gmail.com
+2025-09-18 00:59:14,244 - INFO - Waiting for 4 seconds...
+2025-09-18 00:59:18,250 - INFO - (3/6) Preparing email for sampics710@gmail.com using himanshusingh60120@gmail.com [ID: 258bf6a3-4e76-46cd-98e5-b4e2f9b0ace0]
+2025-09-18 00:59:22,419 - INFO - --> Email sent successfully to sampics710@gmail.com
+2025-09-18 00:59:22,660 - INFO - Waiting for 1 seconds...
+2025-09-18 00:59:23,665 - INFO - (4/6) Preparing email for samruddhij710@gmail.com using himanshusingh60120@gmail.com [ID: 0c8567a8-0e3f-4848-a8ce-e49cb53ed064]
+2025-09-18 00:59:28,189 - INFO - --> Email sent successfully to samruddhij710@gmail.com
+2025-09-18 00:59:28,427 - INFO - Waiting for 1 seconds...
+2025-09-18 00:59:29,432 - INFO - (5/6) Preparing email for sansan4727@gmail.com using himanshusingh60120@gmail.com [ID: ed102efb-33b2-4d68-84ad-ef9a36d4e465]
+2025-09-18 00:59:32,892 - INFO - --> Email sent successfully to sansan4727@gmail.com
+2025-09-18 00:59:33,130 - INFO - Waiting for 1 seconds...
+2025-09-18 00:59:34,136 - INFO - (6/6) Preparing email for himanshusingh60120@gmail.com using himanshusingh60120@gmail.com [ID: 19372bfe-32f3-4913-8fc7-3536c9290719]
+2025-09-18 00:59:37,613 - INFO - --> Email sent successfully to himanshusingh60120@gmail.com
+2025-09-18 00:59:37,856 - INFO - Sending report successfully saved to ./sending_report.csv
+2025-09-18 13:04:02,900 - INFO - Found 3 recipients in ./EmailTest.csv
+2025-09-18 13:04:02,900 - INFO - Loaded 1 sender accounts.
+2025-09-18 13:04:03,892 - INFO - (1/3) Preparing email for himanshusingh60120@gmail.com using himanshusingh60120@gmail.com [ID: 4fbd6f55-714c-449f-afff-e2b1057a78dd]
+2025-09-18 13:04:06,561 - ERROR - --> FAILED for himanshusingh60120@gmail.com: An unexpected error occurred: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1006)
+2025-09-18 13:04:06,561 - INFO - Waiting for 1 seconds...
+2025-09-18 13:04:07,566 - INFO - (2/3) Preparing email for fshaikh@kingsresearch.com using himanshusingh60120@gmail.com [ID: 25525d80-47aa-41b3-9622-f3dc19c6e131]
+2025-09-18 13:04:09,729 - ERROR - --> FAILED for fshaikh@kingsresearch.com: An unexpected error occurred: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1006)
+2025-09-18 13:04:09,729 - INFO - Waiting for 2 seconds...
+2025-09-18 13:04:11,743 - INFO - (3/3) Preparing email for hsingh@kingsresearch.com using himanshusingh60120@gmail.com [ID: ef8c1aea-6b0c-4a92-9e28-85390b6ad544]
+2025-09-18 13:04:13,735 - ERROR - --> FAILED for hsingh@kingsresearch.com: An unexpected error occurred: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1006)
+2025-09-18 13:04:13,735 - INFO - Sending report successfully saved to ./sending_report.csv
+2025-09-18 13:07:58,151 - INFO - Found 3 recipients in ./EmailTest.csv
+2025-09-18 13:07:58,151 - INFO - Loaded 1 sender accounts.
+2025-09-18 13:07:59,156 - INFO - (1/3) Preparing email for himanshusingh60120@gmail.com using hsingh@kingsresearch.com [ID: f0eb8b3d-80a4-40c6-9c35-f86bc8481da0]
+2025-09-18 13:08:01,517 - ERROR - --> FAILED for himanshusingh60120@gmail.com: An unexpected error occurred: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1006)
+2025-09-18 13:08:01,517 - INFO - Waiting for 4 seconds...
+2025-09-18 13:08:05,523 - INFO - (2/3) Preparing email for fshaikh@kingsresearch.com using hsingh@kingsresearch.com [ID: 57ff2787-f0d3-481c-93a5-91a94c31dc95]
+2025-09-18 13:08:07,496 - ERROR - --> FAILED for fshaikh@kingsresearch.com: An unexpected error occurred: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1006)
+2025-09-18 13:08:07,496 - INFO - Waiting for 3 seconds...
+2025-09-18 13:08:10,499 - INFO - (3/3) Preparing email for hsingh@kingsresearch.com using hsingh@kingsresearch.com [ID: 1f4349e0-cc5e-4eb6-826a-a3dbb83008cb]
+2025-09-18 13:08:12,456 - ERROR - --> FAILED for hsingh@kingsresearch.com: An unexpected error occurred: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1006)
+2025-09-18 13:08:12,456 - INFO - Sending report successfully saved to ./sending_report.csv
+2025-09-18 13:20:50,441 - INFO - Found 3 recipients in ./EmailTest.csv
+2025-09-18 13:20:50,441 - INFO - Loaded 1 sender accounts.
+2025-09-18 13:20:50,476 - INFO - (1/3) Preparing email for himanshusingh60120@gmail.com using hsingh@kingsresearch.com [ID: 0d972997-2c84-424d-85da-86bbaf3911c7]
+2025-09-18 13:20:55,491 - INFO - --> Email sent successfully to himanshusingh60120@gmail.com
+2025-09-18 13:20:55,697 - INFO - Waiting for 1 seconds...
+2025-09-18 13:20:56,714 - INFO - (2/3) Preparing email for fshaikh@kingsresearch.com using hsingh@kingsresearch.com [ID: f661369d-48d6-449f-951f-9cdc093cdccf]
+2025-09-18 13:21:00,782 - INFO - --> Email sent successfully to fshaikh@kingsresearch.com
+2025-09-18 13:21:01,002 - INFO - Waiting for 2 seconds...
+2025-09-18 13:21:03,008 - INFO - (3/3) Preparing email for hsingh@kingsresearch.com using hsingh@kingsresearch.com [ID: 440dbe32-b774-4b42-b585-bc0f8ca3dc61]
+2025-09-18 13:21:07,106 - INFO - --> Email sent successfully to hsingh@kingsresearch.com
+2025-09-18 13:21:07,335 - INFO - Sending report successfully saved to ./sending_report.csv
+2025-09-18 13:21:58,478 - INFO - Found 3 recipients in ./EmailTest.csv
+2025-09-18 13:21:58,478 - INFO - Loaded 1 sender accounts.
+2025-09-18 13:21:58,494 - INFO - (1/3) Preparing email for himanshusingh60120@gmail.com using hsingh@kingsresearch.com [ID: 35fb5d02-a368-41e5-9def-b5f35fe179cd]
+2025-09-18 13:22:03,127 - INFO - --> Email sent successfully to himanshusingh60120@gmail.com
+2025-09-18 13:22:03,348 - INFO - Waiting for 3 seconds...
+2025-09-18 13:22:06,361 - INFO - (2/3) Preparing email for fshaikh@kingsresearch.com using hsingh@kingsresearch.com [ID: 2e597adf-db2f-4624-a364-eb840e80c6a8]
+2025-09-18 13:22:10,490 - INFO - --> Email sent successfully to fshaikh@kingsresearch.com
+2025-09-18 13:22:10,708 - INFO - Waiting for 2 seconds...
+2025-09-18 13:22:12,712 - INFO - (3/3) Preparing email for hsingh@kingsresearch.com using hsingh@kingsresearch.com [ID: 257f488c-511b-41e5-90c6-273e31c00080]
+2025-09-18 13:22:16,713 - INFO - --> Email sent successfully to hsingh@kingsresearch.com
+2025-09-18 13:22:17,013 - INFO - Sending report successfully saved to ./sending_report.csv
+2025-09-18 13:25:22,125 - INFO - Found 3 recipients in ./EmailTest.csv
+2025-09-18 13:25:22,125 - INFO - Loaded 1 sender accounts.
+2025-09-18 13:25:22,144 - INFO - (1/3) Preparing email for himanshusingh60120@gmail.com using hsingh@kingsresearch.com [ID: 6ebbfd66-0007-45ee-bb78-2c3a0ee59866]
+2025-09-18 13:25:26,742 - INFO - --> Email sent successfully to himanshusingh60120@gmail.com
+2025-09-18 13:25:26,963 - INFO - Waiting for 3 seconds...
+2025-09-18 13:25:29,974 - INFO - (2/3) Preparing email for fshaikh@kingsresearch.com using hsingh@kingsresearch.com [ID: e019f333-8361-4f80-9e62-c4377dfb5c76]
+2025-09-18 13:25:34,061 - INFO - --> Email sent successfully to fshaikh@kingsresearch.com
+2025-09-18 13:25:34,301 - INFO - Waiting for 4 seconds...
+2025-09-18 13:25:38,308 - INFO - (3/3) Preparing email for hsingh@kingsresearch.com using hsingh@kingsresearch.com [ID: 70b4fe97-f39f-45ae-ac4a-86b23ad6dc50]
+2025-09-18 13:25:42,401 - INFO - --> Email sent successfully to hsingh@kingsresearch.com
+2025-09-18 13:25:42,801 - INFO - Sending report successfully saved to ./sending_report.csv
+2025-09-18 14:16:45,309 - INFO - Found 3 recipients in ./EmailTest.csv
+2025-09-18 14:16:45,323 - INFO - Loaded 1 sender accounts.
+2025-09-18 14:16:45,348 - INFO - (1/3) Preparing email for himanshusingh60120@gmail.com using hsingh@kingsresearch.com [ID: fdb7a6bd-01d9-4174-9218-a4290f686f28]
+2025-09-18 14:16:50,878 - INFO - --> Email sent successfully to himanshusingh60120@gmail.com
+2025-09-18 14:16:51,110 - INFO - Waiting for 2 seconds...
+2025-09-18 14:16:53,113 - INFO - (2/3) Preparing email for fshaikh@kingsresearch.com using hsingh@kingsresearch.com [ID: eed7c422-c027-45e5-ad9d-6929db8f2953]
+2025-09-18 14:16:57,877 - INFO - --> Email sent successfully to fshaikh@kingsresearch.com
+2025-09-18 14:16:58,101 - INFO - Waiting for 2 seconds...
+2025-09-18 14:17:00,106 - INFO - (3/3) Preparing email for hsingh@kingsresearch.com using hsingh@kingsresearch.com [ID: 3cb9c4bf-18a7-408a-85b6-0a44dd6b4395]
+2025-09-18 14:17:04,399 - INFO - --> Email sent successfully to hsingh@kingsresearch.com
+2025-09-18 14:17:04,635 - INFO - Sending report successfully saved to ./sending_report.csv
+2025-09-18 15:27:40,190 - INFO - Found 3 recipients in ./EmailTest.csv
+2025-09-18 15:27:40,206 - INFO - Loaded 1 sender accounts.
+2025-09-18 15:27:40,273 - INFO - (1/3) Preparing email for himanshusingh60120@gmail.com using hsingh@kingsresearch.com [ID: 64b038a2-d59c-49d4-a86b-62f34c77d42d]
+2025-09-18 15:27:45,105 - INFO - --> Email sent successfully to himanshusingh60120@gmail.com
+2025-09-18 15:27:45,334 - INFO - Waiting for 1 seconds...
+2025-09-18 15:27:46,344 - INFO - (2/3) Preparing email for fshaikh@kingsresearch.com using hsingh@kingsresearch.com [ID: b572e841-2f71-4463-89e4-f41381cf6860]
+2025-09-18 15:27:50,487 - INFO - --> Email sent successfully to fshaikh@kingsresearch.com
+2025-09-18 15:27:50,707 - INFO - Waiting for 1 seconds...
+2025-09-18 15:27:51,721 - INFO - (3/3) Preparing email for hsingh@kingsresearch.com using hsingh@kingsresearch.com [ID: 1d370e96-9440-44bf-8295-417167a12280]
+2025-09-18 15:27:56,010 - INFO - --> Email sent successfully to hsingh@kingsresearch.com
+2025-09-18 15:27:56,247 - INFO - Sending report successfully saved to ./sending_report.csv
+2025-09-18 15:30:06,221 - INFO - Found 3 recipients in ./EmailTest.csv
+2025-09-18 15:30:06,221 - INFO - Loaded 1 sender accounts.
+2025-09-18 15:30:06,221 - INFO - (1/3) Preparing email for himanshusingh60120@gmail.com using hsingh@kingsresearch.com [ID: 563af160-394d-4772-ba92-07f9f787c979]
+2025-09-18 15:30:10,967 - INFO - --> Email sent successfully to himanshusingh60120@gmail.com
+2025-09-18 15:30:11,186 - INFO - Waiting for 4 seconds...
+2025-09-18 15:30:15,188 - INFO - (2/3) Preparing email for fshaikh@kingsresearch.com using hsingh@kingsresearch.com [ID: 7a70c45e-601d-4d74-a54c-846d59045965]
+2025-09-18 15:30:19,388 - INFO - --> Email sent successfully to fshaikh@kingsresearch.com
+2025-09-18 15:30:19,614 - INFO - Waiting for 1 seconds...
+2025-09-18 15:30:20,619 - INFO - (3/3) Preparing email for hsingh@kingsresearch.com using hsingh@kingsresearch.com [ID: d0af7724-4e53-492d-8581-e1758a496738]
+2025-09-18 15:30:25,083 - INFO - --> Email sent successfully to hsingh@kingsresearch.com
+2025-09-18 15:30:25,294 - INFO - Sending report successfully saved to ./sending_report.csv
