@@ -3,3 +3,4 @@ tqdm==4.66.1
 
 Flask
 gunicorn
+Flask-Cors
