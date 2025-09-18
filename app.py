@@ -1,4 +1,4 @@
-# app.py (Updated Version)
+# app.py (Corrected for Vercel)
 import os
 import uuid
 import json
@@ -6,23 +6,23 @@ import threading
 import csv
 import logging
 import time
-from queue import Queue # NEW: Import the Queue for robust inter-thread communication
+from queue import Queue
 from flask import Flask, render_template, request, Response, send_from_directory
 from werkzeug.utils import secure_filename
 from src.email_sender import load_sender_accounts, load_recipients_from_csv, send_emails_with_progress
 
-# --- Configuration ---
-UPLOAD_FOLDER = 'uploads'
-REPORTS_FOLDER = 'reports'
+# --- MODIFIED: Configuration for Vercel's temporary file system ---
+UPLOAD_FOLDER = '/tmp/uploads'
+REPORTS_FOLDER = '/tmp/reports'
+# ---
 ALLOWED_EXTENSIONS = {'csv'}
 
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-app.config['REPORTS_FOLDER'] = REPORTS_FOLDER
+# The UPLOAD_FOLDER and REPORTS_FOLDER are now used directly, no need to set them in app.config
+# for this specific logic.
 
 logging.basicConfig(level=logging.INFO)
 
-# --- MODIFIED: In-memory job store now uses Queues ---
 jobs = {}
 
 def allowed_file(filename):
@@ -44,11 +44,11 @@ def run_email_task(job_id, subject, body, recipients_path, senders_path):
         for update in send_emails_with_progress(recipients, sender_accounts, subject, body):
             if 'report' in update:
                 report_data = update['report']
-                if not os.path.exists(app.config['REPORTS_FOLDER']):
-                    os.makedirs(app.config['REPORTS_FOLDER'])
+                if not os.path.exists(REPORTS_FOLDER):
+                    os.makedirs(REPORTS_FOLDER)
                 
                 report_filename = f"report_{job_id}.csv"
-                report_filepath = os.path.join(app.config['REPORTS_FOLDER'], report_filename)
+                report_filepath = os.path.join(REPORTS_FOLDER, report_filename)
                 
                 if report_data:
                     try:
@@ -65,21 +65,17 @@ def run_email_task(job_id, subject, body, recipients_path, senders_path):
                 job_queue.put(f"event: progress\ndata: {json.dumps(update)}\n\n")
 
     except Exception as e:
-        # NEW: Catch any unexpected crash in the task
         logging.error(f"A fatal error occurred in job {job_id}: {e}", exc_info=True)
         fatal_error_data = json.dumps({'error': f'A fatal error occurred on the server: {e}'})
         job_queue.put(f"event: error\ndata: {fatal_error_data}\n\n")
 
     finally:
-        # NEW: Signal that the task is completely done
         job_queue.put("DONE")
-        # Clean up uploaded files
         try:
             os.remove(recipients_path)
             os.remove(senders_path)
         except OSError as e:
             logging.error(f"Error removing uploaded files: {e}")
-
 
 @app.route('/')
 def index():
@@ -97,20 +93,19 @@ def start_sending():
     if not senders_file or not allowed_file(senders_file.filename):
         return {"error": "Invalid or missing senders CSV file."}, 400
 
-    if not os.path.exists(app.config['UPLOAD_FOLDER']):
-        os.makedirs(app.config['UPLOAD_FOLDER'])
+    if not os.path.exists(UPLOAD_FOLDER):
+        os.makedirs(UPLOAD_FOLDER)
     
     job_id = str(uuid.uuid4())
 
     recipients_filename = f"recipients_{job_id}.csv"
     senders_filename = f"senders_{job_id}.csv"
-    recipients_path = os.path.join(app.config['UPLOAD_FOLDER'], recipients_filename)
-    senders_path = os.path.join(app.config['UPLOAD_FOLDER'], senders_filename)
+    recipients_path = os.path.join(UPLOAD_FOLDER, recipients_filename)
+    senders_path = os.path.join(UPLOAD_FOLDER, senders_filename)
     
     recipients_file.save(recipients_path)
     senders_file.save(senders_path)
 
-    # MODIFIED: Create and store a queue for the new job
     jobs[job_id] = {'queue': Queue()}
 
     thread = threading.Thread(target=run_email_task, args=(job_id, subject, body, recipients_path, senders_path))
@@ -121,23 +116,18 @@ def start_sending():
 @app.route('/progress/<job_id>')
 def progress(job_id):
     def generate():
-        # MODIFIED: Get the queue for this specific job
         job_queue = jobs.get(job_id, {}).get('queue')
         if not job_queue:
             return
 
-        # MODIFIED: Stream from the queue until the "DONE" signal is received
         while True:
             data = job_queue.get()
             if data == "DONE":
                 break
             yield data
-
+        
     return Response(generate(), mimetype='text/event-stream')
 
 @app.route('/download/<filename>')
 def download(filename):
-    return send_from_directory(app.config['REPORTS_FOLDER'], filename, as_attachment=True)
-
-if __name__ == '__main__':
-    app.run(debug=True, threaded=True)
+    return send_from_directory(REPORTS_FOLDER, filename, as_attachment=True)
