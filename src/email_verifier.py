@@ -38,7 +38,6 @@ class EmailVerifier:
             mx_records = sorted([(r.preference, r.exchange.to_text()) for r in records])
             return mx_records
         except (dns.resolver.NoAnswer, dns.resolver.NXDOMAIN, dns.resolver.NoNameservers):
-            # This is the key part: if the domain does not exist or has no MX records, return None.
             return None
 
     def _generate_random_email(self, domain):
@@ -48,66 +47,70 @@ class EmailVerifier:
 
     def verify_email(self, email):
         """
-        Performs a comprehensive verification of a single email address.
+        Performs a comprehensive verification of a single email address with retry logic for network errors.
         """
-        # Default result structure
         result = {
-            'email': email, 
-            'status': 'unknown', 
-            'reason': 'An unexpected error occurred',
-            'is_disposable': False, 
-            'is_role_account': False
+            'email': email, 'status': 'unknown', 'reason': 'An unexpected error occurred',
+            'is_disposable': False, 'is_role_account': False
         }
 
-        # 1. Syntax Check
         if not re.match(r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)", email):
             result.update({'status': 'invalid', 'reason': 'Invalid email syntax'})
             return result
 
         username, domain = email.split('@')
         domain = domain.lower()
-        
         result['is_disposable'] = domain in DISPOSABLE_DOMAINS
         result['is_role_account'] = username.lower() in ROLE_ACCOUNTS
 
-        # 2. DNS (MX Record) Check
         mx_records = self._get_mx_records(domain)
         if not mx_records:
             result.update({'status': 'invalid', 'reason': 'No MX records found for domain'})
             return result
-
-        # 3. SMTP Connection Check
-        try:
-            with smtplib.SMTP(mx_records[0][1], timeout=self.timeout) as server:
-                server.set_debuglevel(0)
-                server.ehlo(self.helo_name)
-                server.mail(self.from_email)
-                
-                # Check the actual email address
-                code, message = server.rcpt(email)
-
-                if code == 250:
-                    # Address is accepted, now check for catch-all
-                    random_email = self._generate_random_email(domain)
-                    catch_all_code, _ = server.rcpt(random_email)
-                    if catch_all_code == 250:
-                        result.update({'status': 'catch-all', 'reason': 'Domain accepts all emails'})
-                    else:
-                        result.update({'status': 'valid', 'reason': 'SMTP server confirmed address exists'})
-                
-                elif code in [550, 551, 553, 554]:
-                    result.update({'status': 'invalid', 'reason': f"SMTP rejected address: {message.decode(errors='ignore')}"})
-                
-                else: # Handle temporary errors or other codes
-                    result.update({'status': 'unknown', 'reason': f"SMTP Error (Code: {code}): {message.decode(errors='ignore')}"})
-
-        except (socket.timeout, smtplib.SMTPServerDisconnected, ConnectionRefusedError, OSError) as e:
-            result.update({'status': 'unknown', 'reason': f'SMTP connection failed: {e}'})
         
-        except Exception as e:
-            # Catch any other unexpected errors during verification
-            result.update({'status': 'unknown', 'reason': f'A verification error occurred: {e}'})
+        # --- NEW: Retry loop for network-related errors ---
+        retries = 3
+        for attempt in range(retries):
+            try:
+                with smtplib.SMTP(mx_records[0][1], timeout=self.timeout) as server:
+                    server.set_debuglevel(0)
+                    server.ehlo(self.helo_name)
+                    server.mail(self.from_email)
+                    code, message = server.rcpt(email)
+
+                    if code == 250:
+                        random_email = self._generate_random_email(domain)
+                        catch_all_code, _ = server.rcpt(random_email)
+                        if catch_all_code == 250:
+                            result.update({'status': 'catch-all', 'reason': 'Domain accepts all emails'})
+                        else:
+                            result.update({'status': 'valid', 'reason': 'SMTP server confirmed address exists'})
+                    elif code in [550, 551, 553, 554]:
+                        result.update({'status': 'invalid', 'reason': f"SMTP rejected address: {message.decode(errors='ignore')}"})
+                    else:
+                        result.update({'status': 'unknown', 'reason': f"SMTP Error (Code: {code}): {message.decode(errors='ignore')}"})
+                    
+                    return result # <-- Exit loop on success or clear SMTP status
+
+            except OSError as e:
+                # This specifically catches the "[Errno 99] Cannot assign requested address" error
+                if e.errno == 99 and attempt < retries - 1:
+                    wait_time = (attempt + 1) * 5  # Wait 5s, then 10s
+                    logging.warning(f"Network error for {email} (Attempt {attempt + 1}). Retrying in {wait_time}s...")
+                    time.sleep(wait_time)
+                    continue # Go to the next attempt
+                else:
+                    result.update({'status': 'unknown', 'reason': f'SMTP connection failed: {e}'})
+                    return result # Return failure after last attempt
             
+            except (socket.timeout, smtplib.SMTPServerDisconnected, ConnectionRefusedError) as e:
+                 result.update({'status': 'unknown', 'reason': f'SMTP connection failed: {e}'})
+                 return result # Return failure on other connection issues
+
+            except Exception as e:
+                result.update({'status': 'unknown', 'reason': f'A verification error occurred: {e}'})
+                return result
+                
         return result
 
     def bulk_verify(self, emails, workers=10):
