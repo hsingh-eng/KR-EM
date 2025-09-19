@@ -1,15 +1,17 @@
 # src/email_sender.py
 import csv, smtplib, ssl, time, logging, random, uuid
 from email.message import EmailMessage
+from datetime import datetime
 
 SMTP_SERVER = "smtp.gmail.com"
 SMTP_PORT = 587
 TRACKING_SERVER_DOMAIN = "http://YOUR_SERVER_IP_OR_DOMAIN:5000"
 
-# --- NEW FUNCTION TO SEND A SINGLE EMAIL ---
-def send_single_email(recipient, sender, subject_template, body_template):
+# --- MODIFIED: Function now accepts 'is_catch_all' ---
+def send_single_email(recipient, sender, subject_template, body_template, is_catch_all):
     """
-    Sends a single email and returns a dictionary with the result.
+    Sends a single email and returns a dictionary with the result,
+    including whether the domain is a catch-all.
     """
     sender_email = sender['email']
     sender_password = sender['password']
@@ -18,9 +20,9 @@ def send_single_email(recipient, sender, subject_template, body_template):
     
     status = 'Failed'
     reason = ''
+    timestamp = ''
 
     try:
-        # Using create_default_context for better security
         context = ssl.create_default_context()
         with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
             server.starttls(context=context)
@@ -36,6 +38,7 @@ def send_single_email(recipient, sender, subject_template, body_template):
             server.send_message(msg)
             
             status = 'Success'
+            timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             logging.info(f"Successfully sent email to {recipient_email}")
 
     except smtplib.SMTPAuthenticationError:
@@ -45,9 +48,12 @@ def send_single_email(recipient, sender, subject_template, body_template):
         reason = str(e)
         logging.error(f"Failed to send to {recipient_email}: {reason}")
     
+    # --- MODIFIED: Added 'catch_all' to the returned dictionary ---
     return {
         'recipient_email': recipient_email,
         'sender_email': sender_email,
+        'timestamp': timestamp,
+        'catch_all': is_catch_all, # <-- New column
         'status': status,
         'reason': reason
     }

@@ -17,7 +17,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let finalReportData = [];
 
-    // --- ENTIRE FORM SUBMISSION LOGIC IS REBUILT ---
     emailForm.addEventListener('submit', async function (e) {
         e.preventDefault();
 
@@ -35,7 +34,6 @@ document.addEventListener('DOMContentLoaded', function () {
         submitBtn.textContent = 'Processing...';
 
         try {
-            // Read and parse files directly in the browser
             const recipients = await parseCsv(recipientsFile);
             const senders = await parseCsv(sendersFile);
 
@@ -46,7 +44,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 throw new Error("Could not read sender accounts. Check the CSV format for 'email' and 'app_password' columns.");
             }
 
-            // Switch to progress view
             formView.classList.add('hidden');
             progressView.classList.remove('hidden');
 
@@ -58,23 +55,23 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // --- NEW FUNCTION TO MANAGE THE SENDING LOOP ---
     async function startClientSideSending(recipients, senders, subject, body) {
         let successCount = 0;
-        finalReportData = []; // Clear previous report
+        finalReportData = [];
         const totalRecipients = recipients.length;
 
         for (let i = 0; i < totalRecipients; i++) {
             const recipient = recipients[i];
-            // Round-robin sender selection
             const sender = senders[i % senders.length];
             
             const progress = Math.round(((i + 1) / totalRecipients) * 100);
             
-            // Update UI
             progressBar.style.width = progress + '%';
             progressPercent.textContent = progress + '%';
-            statusMessage.textContent = `(${i + 1}/${totalRecipients}) Sending to: ${recipient.Email}`;
+            statusMessage.textContent = `(${i + 1}/${totalRecipients}) Processing: ${recipient.Email}`;
+
+            // --- NEW: Start a timer before the API call ---
+            const startTime = new Date().getTime();
 
             try {
                 const response = await fetch('/send-one-email', {
@@ -91,43 +88,60 @@ document.addEventListener('DOMContentLoaded', function () {
                 const result = await response.json();
                 finalReportData.push(result);
 
+                // Check for server-side success or failure (status 200)
                 if (response.ok) {
-                    successCount++;
-                    successCounter.textContent = successCount;
+                    // Check the 'status' field in the JSON payload
+                    if (result.status === 'Success') {
+                        successCount++;
+                        successCounter.textContent = successCount;
+                    }
                 }
 
             } catch (error) {
                 finalReportData.push({
                     recipient_email: recipient.Email,
                     sender_email: sender.email,
+                    timestamp: new Date().toISOString(),
+                    catch_all: false,
                     status: 'Failed',
                     reason: 'Network error or server unreachable'
                 });
             }
 
-            // The delay is now handled by the browser
+            // --- NEW: Calculate the remaining delay ---
             if (i < totalRecipients - 1) {
-                const delay = 20000 + Math.random() * 10000; // 20-30 seconds
-                await new Promise(resolve => setTimeout(resolve, delay));
+                // Calculate how long the verification/send process took
+                const endTime = new Date().getTime();
+                const timeElapsed = endTime - startTime;
+
+                // Determine the target delay (20 to 30 seconds)
+                const targetDelay = 20000 + Math.random() * 10000;
+
+                // Calculate how much *more* we need to wait
+                const remainingDelay = targetDelay - timeElapsed;
+
+                // Only wait if the process took less time than our target delay
+                if (remainingDelay > 0) {
+                    statusMessage.textContent += ` | Waiting for ${Math.round(remainingDelay / 1000)}s...`;
+                    await new Promise(resolve => setTimeout(resolve, remainingDelay));
+                }
             }
         }
         
-        // --- CAMPAIGN COMPLETE ---
         statusMessage.textContent = 'Campaign Complete!';
         generateReport(finalReportData);
         progressView.classList.add('hidden');
         completeView.classList.remove('hidden');
     }
 
-    // --- NEW HELPER TO PARSE CSV FILES IN JAVASCRIPT ---
     function parseCsv(file) {
         return new Promise((resolve, reject) => {
             const reader = new FileReader();
             reader.onload = function(event) {
                 const text = event.target.result;
-                const lines = text.split(/\r\n|\n/).filter(line => line); // Filter out empty lines
+                const lines = text.split(/\r\n|\n/).filter(line => line);
                 if (lines.length < 2) {
-                    return resolve([]); // Handle empty or header-only files
+                    return resolve([]);
                 }
                 const headers = lines[0].split(',').map(h => h.trim());
                 const result = [];
@@ -148,7 +162,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // --- NEW FUNCTION TO GENERATE AND DOWNLOAD THE REPORT ---
     function generateReport(data) {
         if (data.length === 0) return;
         const headers = Object.keys(data[0]);
