@@ -6,6 +6,53 @@ SMTP_SERVER = "smtp.gmail.com"
 SMTP_PORT = 587
 TRACKING_SERVER_DOMAIN = "http://YOUR_SERVER_IP_OR_DOMAIN:5000"
 
+# --- NEW FUNCTION TO SEND A SINGLE EMAIL ---
+def send_single_email(recipient, sender, subject_template, body_template):
+    """
+    Sends a single email and returns a dictionary with the result.
+    """
+    sender_email = sender['email']
+    sender_password = sender['password']
+    recipient_email = recipient['email']
+    tracking_id = str(uuid.uuid4())
+    
+    status = 'Failed'
+    reason = ''
+
+    try:
+        # Using create_default_context for better security
+        context = ssl.create_default_context()
+        with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
+            server.starttls(context=context)
+            server.login(sender_email, sender_password)
+            msg = EmailMessage()
+            msg['From'] = sender_email
+            msg['To'] = recipient_email
+            msg['Subject'] = subject_template.format(name=recipient['name'])
+            html_content = body_template.format(name=recipient['name']).replace('\n', '<br>')
+            html_body = f"""<html><body>{html_content}<br><br><img src="{TRACKING_SERVER_DOMAIN}/track?id={tracking_id}" width="1" height="1" alt=""></body></html>"""
+            msg.set_content(body_template.format(name=recipient['name']))
+            msg.add_alternative(html_body, subtype='html')
+            server.send_message(msg)
+            
+            status = 'Success'
+            logging.info(f"Successfully sent email to {recipient_email}")
+
+    except smtplib.SMTPAuthenticationError:
+        reason = f"Authentication error with {sender_email}. Check App Password."
+        logging.error(f"Failed to send to {recipient_email}: {reason}")
+    except Exception as e:
+        reason = str(e)
+        logging.error(f"Failed to send to {recipient_email}: {reason}")
+    
+    return {
+        'recipient_email': recipient_email,
+        'sender_email': sender_email,
+        'status': status,
+        'reason': reason
+    }
+
+# --- UNUSED BUT KEPT FOR REFERENCE ---
 def load_sender_accounts(filepath):
     accounts = []
     try:
@@ -31,64 +78,5 @@ def load_recipients_from_csv(csv_filepath):
         return []
 
 def send_emails_with_progress(recipients, sender_accounts, subject_template, body_template):
-    if not recipients or not sender_accounts:
-        return
-
-    num_senders = len(sender_accounts)
-    context = ssl._create_unverified_context()
-    total_recipients = len(recipients)
-    success_count = 0
-    
-    report_data = []
-
-    for i, person in enumerate(recipients):
-        progress = int(((i + 1) / total_recipients) * 100)
-        recipient_email = person['email']
-        
-        # Yield current status before sending
-        yield {'progress': progress, 'current_email': recipient_email, 'success_count': success_count}
-
-        current_sender = sender_accounts[i % num_senders]
-        sender_email = current_sender['email']
-        sender_password = current_sender['password']
-        tracking_id = str(uuid.uuid4())
-        
-        status = 'Failed'
-        reason = ''
-
-        try:
-            with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
-                server.starttls(context=context)
-                server.login(sender_email, sender_password)
-                msg = EmailMessage()
-                msg['From'] = sender_email
-                msg['To'] = recipient_email
-                msg['Subject'] = subject_template.format(name=person['name'])
-                html_content = body_template.format(name=person['name']).replace('\n', '<br>')
-                html_body = f"""<html><body>{html_content}<br><br><img src="{TRACKING_SERVER_DOMAIN}/track?id={tracking_id}" width="1" height="1" alt=""></body></html>"""
-                msg.set_content(body_template.format(name=person['name']))
-                msg.add_alternative(html_body, subtype='html')
-                server.send_message(msg)
-                
-                status = 'Success'
-                success_count += 1
-
-        except smtplib.SMTPAuthenticationError as e:
-            reason = f"Authentication error with {sender_email}. Check App Password."
-            logging.error(f"Failed to send to {recipient_email}: {reason}")
-        except Exception as e:
-            reason = str(e)
-            logging.error(f"Failed to send to {recipient_email}: {reason}")
-        
-        report_data.append({
-            'recipient_email': recipient_email,
-            'sender_email': sender_email,
-            'status': status,
-            'reason': reason
-        })
-        
-        if i < total_recipients - 1:
-            time.sleep(random.randint(20, 30))
-
-    # Yield the final report data
-    yield {'report': report_data}
+    # This function is no longer used by the web app but is kept for potential CLI use.
+    pass
